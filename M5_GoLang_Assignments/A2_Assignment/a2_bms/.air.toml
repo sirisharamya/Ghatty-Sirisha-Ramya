@@ -1,0 +1,20 @@
+# .air.toml
+
+# Root directory to watch
+root = "."
+
+# Build output directory (temporary)
+tmp_dir = "tmp"
+
+# Directories to exclude
+exclude_dir = ["tmp"]
+
+# Build command
+cmd = "go build -o ./tmp/main.exe ."
+
+# Command to run the built binary
+bin = "./tmp/main.exe"
+
+# Watch file patterns
+include_ext = ["go"]
+exclude_file = [".air.toml"]
