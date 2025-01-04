@@ -1,0 +1,27 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    color: #343a40;
+  }
+  
+  .table {
+    background-color: white;
+  }
+  
+  .list-group-item {
+    font-weight: bold;
+  }
+  
+  @media (max-width: 768px) {
+    #expenseForm {
+      flex-direction: column;
+    }
+  
+    #expenseForm .row > div {
+      margin-bottom: 10px;
+    }
+  }
+  
