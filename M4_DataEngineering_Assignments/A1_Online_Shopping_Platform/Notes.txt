@@ -1,0 +1,121 @@
+1. Find High-Spending Users
+To find users who have spent more than $500 in total across all their orders, you would use $lookup to join the users and orders collections, then $group to calculate the total spending, and $match to filter users based on their spending.
+
+db.users.aggregate([
+  {
+    $lookup: {
+      from: "orders",                  // The orders collection
+      localField: "_id",                // The userId in the users collection
+      foreignField: "userId",           // The userId in the orders collection
+      as: "userOrders"                 // Alias for the orders data
+    }
+  },
+  {
+    $unwind: "$userOrders"             // Flatten the orders array
+  },
+  {
+    $group: {
+      _id: "$_id",                     // Group by userId
+      totalSpent: { 
+        $sum: "$userOrders.totalAmount" // Sum of totalAmount from each order
+      }
+    }
+  },
+  {
+    $match: {
+      totalSpent: { $gt: 500 }          // Filter users who spent more than $500
+    }
+  }
+])
+
+
+
+2. List Popular Products by Average Rating
+To find products with an average rating of 4 or more, you will need to use $unwind to flatten the ratings array, $group to calculate the average rating, and $match to filter based on the average rating.
+
+db.products.aggregate([
+  {
+    $unwind: "$ratings"                // Unwind the ratings array
+  },
+  {
+    $group: {
+      _id: "$_id",                     // Group by productId
+      averageRating: { 
+        $avg: "$ratings.rating"         // Calculate the average rating
+      }
+    }
+  },
+  {
+    $match: {
+      averageRating: { $gte: 4 }        // Filter for products with avg rating >= 4
+    }
+  }
+])
+
+
+3. Search for Orders in a Specific Time Range
+To find orders placed between 2024-12-01 and 2024-12-31 and include the user name for each order, you will use $match to filter by date range and $lookup to join with the users collection.
+
+db.orders.aggregate([
+  {
+    $match: {
+      orderDate: { 
+        $gte: new ISODate("2024-12-01T00:00:00Z"), 
+        $lt: new ISODate("2024-12-31T23:59:59Z") 
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: "users",                   // Join with the users collection
+      localField: "userId",             // The userId in the orders collection
+      foreignField: "_id",              // The _id in the users collection
+      as: "userDetails"
+    }
+  },
+  {
+    $unwind: "$userDetails"             // Flatten the userDetails array
+  },
+  {
+    $project: {
+      orderId: 1,                      // Include the orderId
+      userId: 1,                       // Include the userId
+      orderDate: 1,                    // Include the orderDate
+      "userDetails.name": 1            // Include the user's name
+    }
+  }
+])
+
+
+4. Update Stock After Order Completion
+To update the stock of products after an order is completed, you can use the $inc operator to decrease the stock by the quantity ordered.
+
+db.orders.find({}).forEach(function(order) {
+  order.items.forEach(function(item) {
+    db.products.updateOne(
+      { _id: item.productId },         // Match the productId
+      { $inc: { stock: -item.quantity } }  // Decrease stock by the quantity ordered
+    );
+  });
+});
+
+
+5. Find Nearest Warehouse
+To find the nearest warehouse that stocks a certain product, such as P001, you would use the $geoNear stage to find the closest warehouses within a certain radius, and filter based on the product list.
+
+db.warehouses.aggregate([
+  {
+    $geoNear: {
+      near: { type: "Point", coordinates: [-74.006, 40.7128] }, // Coordinates of the user/location
+      distanceField: "distance",
+      maxDistance: 50000,                    // 50 kilometers
+      query: { products: "P001" },           // Filter warehouses that stock "P001"
+      spherical: true
+    }
+  }
+])
+
+
+
+url:mongodb://localhost:27017
+
