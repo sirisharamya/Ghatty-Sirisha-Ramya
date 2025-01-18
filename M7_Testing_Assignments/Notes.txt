@@ -1,0 +1,24 @@
+1. npm init -y
+2. npm install jest --save-dev
+3. npm test
+
+
+
+Output:
+PS D:\C_Drive\Nexturn\GhattySirishaRamya_Nexturn_Program\M7_Testing_Assignments> npm test
+
+> m7_testing_assignments@1.0.0 test
+> jest
+
+ PASS  __tests__/delayedGreeting.spec.js
+ PASS  __tests__/notificationService.spec.js
+ PASS  __tests__/domManipulation.spec.js
+ PASS  __tests__/stringUtilities.spec.js
+ PASS  __tests__/arrayIndex.spec.js
+ PASS  __tests__/fetchAndDisplayUser.spec.js
+
+Test Suites: 6 passed, 6 total
+Tests:       11 passed, 11 total
+Snapshots:   0 total
+Time:        1.373 s, estimated 2 s
+Ran all test suites.
