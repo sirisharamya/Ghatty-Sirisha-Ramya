@@ -1,5 +1,5 @@
 {
-    "name": "m7_testing_assignments",
+    "name": "m8_testing_assignments",
     "version": "1.0.0",
     "scripts": {
         "test": "jest"
