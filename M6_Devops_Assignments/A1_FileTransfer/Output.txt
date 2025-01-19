@@ -1,0 +1,14 @@
+Started by user Ghatty Sirisha Ramya
+
+Running as SYSTEM
+Building in workspace D:\new_jenkins_home\workspace\Windows File Transfer
+[Windows File Transfer] $ cmd /c call C:\Users\LENOVO\Desktop\Code\Temp\myfifo\jenkins12892110128161985391.bat
+
+D:\new_jenkins_home\workspace\Windows File Transfer>xcopy D:\C_Drive\Nexturn\GhattySirishaRamya_Nexturn_Program\M6_Devops_Assignments\source-directory D:\C_Drive\Nexturn\GhattySirishaRamya_Nexturn_Program\M6_Devops_Assignments\target-directory /E /I /H /Y 
+D:\C_Drive\Nexturn\GhattySirishaRamya_Nexturn_Program\M6_Devops_Assignments\source-directory\data.csv
+D:\C_Drive\Nexturn\GhattySirishaRamya_Nexturn_Program\M6_Devops_Assignments\source-directory\file1.txt
+D:\C_Drive\Nexturn\GhattySirishaRamya_Nexturn_Program\M6_Devops_Assignments\source-directory\file2.txt
+3 File(s) copied
+
+D:\new_jenkins_home\workspace\Windows File Transfer>exit 0 
+Finished: SUCCESS
