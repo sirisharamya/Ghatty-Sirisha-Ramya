@@ -1,0 +1,45 @@
+Step 1: Verify the Setup
+Source Directory:
+
+Path: D:\C_Drive\Nexturn\GhattySirishaRamya_Nexturn_Program\M6_Devops_Assignments\source-directory
+Ensure there are test files like:
+file1.txt: Contains This is file 1.
+file2.txt: Contains This is file 2.
+data.csv: Contains some sample CSV content like Name, Age, City.
+Target Directory:
+
+Path: D:\C_Drive\Nexturn\GhattySirishaRamya_Nexturn_Program\M6_Devops_Assignments\target-directory
+Ensure this folder is empty.
+
+
+
+Step 2: Open Jenkins
+Access your Jenkins server by navigating to http://localhost:8081 in your browser (or the URL where Jenkins is hosted).
+Log in with your Jenkins credentials.
+
+
+
+Step 3: Create a Freestyle Job
+Click on "New Item" from the Jenkins dashboard.
+Enter a name for the job, e.g., Windows File Transfer.
+Select "Freestyle Project" and click "OK".
+
+
+
+Step 4: Configure the Freestyle Job
+General Section:
+Add a description, "This job transfers files from source-directory to target-directory."
+Build Section:
+Under "Build", click on "Add build step" and select "Execute Windows batch command".
+Add the following command:
+batch
+Copy
+Edit
+xcopy D:\C_Drive\Nexturn\GhattySirishaRamya_Nexturn_Program\M6_Devops_Assignments\source-directory D:\C_Drive\Nexturn\GhattySirishaRamya_Nexturn_Program\M6_Devops_Assignments\target-directory /E /I /H /Y
+
+
+
+Step 5: Save and Build
+Click "Save" to save the job configuration.
+Run the job:
+Click "Build Now" from the job dashboard.
